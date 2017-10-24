@@ -1,0 +1,49 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "hero_break_anim",
+  "_objFlags": 0,
+  "_rawFiles": null,
+  "_duration": 0.6833333333333333,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "86c82b98-1700-4706-9104-01d76f966a43"
+            }
+          },
+          {
+            "frame": 0.16666666666666666,
+            "value": {
+              "__uuid__": "8200ecf0-9625-4fa8-bf06-77b834d83efb"
+            }
+          },
+          {
+            "frame": 0.3333333333333333,
+            "value": {
+              "__uuid__": "6743ca1b-1434-466a-acad-bcc4e3392df4"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "d38a9d02-4e52-4f08-a91c-48f622b9ccee"
+            }
+          },
+          {
+            "frame": 0.6666666666666666,
+            "value": {
+              "__uuid__": "f164e370-eb2b-42aa-a0b1-0d7496f5fca0"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}
