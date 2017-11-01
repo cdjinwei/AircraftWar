@@ -1,7 +1,7 @@
-var BasePlane = require('BasePlane');
+// var BasePlane = require('BasePlane');
 
 cc.Class({
-    extends: BasePlane,
+    extends: cc.Component,
 
     properties: {
         // foo: {
@@ -24,24 +24,33 @@ cc.Class({
         },
     },
 
-    ctor: function () {
-        console.log('===================init HeroPlane:');
-        this.nodeBody = this.getCurrentNode();
+    // ctor: function () {
+    //     console.log('===================init HeroPlane:');
+    //     this.nodeBody = this.getCurrentNode();
+    //     this.registerControllEvent();
+    //     // this.shoot();
+    //     // this.schedule(this.shoot,1);
+    //     cc.director.getScheduler().schedule(this.shoot, this, 0.5);
+    // },
+    onLoad: function () {
         this.registerControllEvent();
-        // this.shoot();
-        // this.schedule(this.shoot,1);
         cc.director.getScheduler().schedule(this.shoot, this, 0.5);
     },
+    onCollisionEnter: function (other,self) {
 
+    },
+    onCollisionStay: function (other,self) {
+      console.log('====================Hero onCollisionStay');
+    },
     registerControllEvent: function () {
         var self = this;
-        this.nodeBody.on(cc.Node.EventType.TOUCH_START,function (event) {
+        this.node.on(cc.Node.EventType.TOUCH_START,function (event) {
            self.canMove = true;
         });
-        this.getCurrentNode().on(cc.Node.EventType.TOUCH_END,function (event) {
+        this.node.on(cc.Node.EventType.TOUCH_END,function (event) {
             self.canMove = false;
         });
-        this.getCurrentNode().on(cc.Node.EventType.TOUCH_MOVE,function (event) {
+        this.node.on(cc.Node.EventType.TOUCH_MOVE,function (event) {
             if(self.canMove){
                 var pos = event.getDelta();
                 self.adjustPlanePosition(pos);
@@ -54,38 +63,37 @@ cc.Class({
         var bullet = null;
         if(cc.bulletPool.size() > 0){
             bullet = cc.bulletPool.get();
-            console.log('===============bullet pool get:'+cc.bulletPool.size());
         }else{
             var bulletPrefab = cc.loader.getRes('Prefab/bullet_1');
             bullet = cc.instantiate(bulletPrefab);
         }
         var scene = cc.director.getScene();
-        var planePos = cc.v2(self.nodeBody.x,self.nodeBody.y+50);
+        var planePos = cc.v2(self.node.x,self.node.y+50);
         var worldPos = scene.convertToWorldSpace(planePos);
         bullet.position = worldPos;
         scene.addChild(bullet);
     },
     setPosition: function (pos) {
-        this.nodeBody.position = pos;
+        this.node.position = pos;
     },
     getHit: function () {
         // console.log('==================getHit hero');
     },
     adjustPlanePosition: function (deltaPos) {
         var self = this;
-        if (self.nodeBody.x+deltaPos.x <=50){
-            self.nodeBody.x = 50;
-        }else if(self.nodeBody.x+deltaPos.x >=590){
-            self.nodeBody.x = 590;
+        if (self.node.x+deltaPos.x <=50){
+            self.node.x = 50;
+        }else if(self.node.x+deltaPos.x >=590){
+            self.node.x = 590;
         }else{
-            self.nodeBody.x = self.nodeBody.x+deltaPos.x;
+            self.node.x = self.node.x+deltaPos.x;
         }
-        if (self.nodeBody.y+deltaPos.y <=55){
-            self.nodeBody.y = 55;
-        }else if(self.nodeBody.y+deltaPos.y >=1080){
-            self.nodeBody.y = 1080;
+        if (self.node.y+deltaPos.y <=55){
+            self.node.y = 55;
+        }else if(self.node.y+deltaPos.y >=1080){
+            self.node.y = 1080;
         }else{
-            self.nodeBody.y = self.nodeBody.y+deltaPos.y;
+            self.node.y = self.node.y+deltaPos.y;
         }
     },
     // called every frame, uncomment this function to activate update callback

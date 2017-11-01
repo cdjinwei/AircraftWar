@@ -20,19 +20,14 @@ var Bullet = cc.Class({
     onLoad: function () {
 
     },
-    testtt: function () {
-        console.log('==================bullet');
-    },
     onCollisionEnter:function (other,self) {
         // this.node.destroy();
         if(cc.bulletPool){
             cc.bulletPool.put(this.node);
-            console.log('===============bullet pool put:'+cc.bulletPool.size());
+            // console.log('===============bullet pool put:'+cc.bulletPool.size());
         }else{
             this.node.destroy();
         }
-        // other.node.destroy();
-        // self.getComponent(Bullet).testtt();
     },
     // called every frame, uncomment this function to activate update callback
     update: function (dt) {

@@ -27,26 +27,45 @@ cc.Class({
         cc.director.getCollisionManager().enabled = true;
         cc.director.getCollisionManager().enabledDebugDraw = true;
         cc.bulletPool = new cc.NodePool();
+        cc.enemyPool = new cc.NodePool();
         this.btn_state = true;
-        // cc.loader.loadRes("Texture/shoot",cc.SpriteAtlas,function (err,atlas) {
-        //     if(err == null){
-        //         console.log('occured some error when loadRes');
-        //     }else{
-        //         self.atlas = atlas;
-        //     }
-        // });
-        var plane_hero = new HeroPlane("1");
-        // this.node.addChild(plane_hero);
-        plane_hero.setPosition(cc.v2(100,100));
+
+        var prefab_res = cc.loader.getRes('Prefab/hero');
+        var plane_hero = cc.instantiate(prefab_res);
+        plane_hero.addComponent(cc.BoxCollider);
+        var frameSize = plane_hero.getComponent(cc.Sprite).spriteFrame.getRect();
+        plane_hero.getComponent(cc.BoxCollider).size = frameSize;
         var scene = cc.director.getScene();
         scene.addChild(plane_hero);
-        this.createEnemy("2");
+        plane_hero.position = cc.v2(200,200);
+
+        plane_hero.addComponent(HeroPlane);
+        cc.director.getScheduler().schedule(this.createEnemy, this, 10);
+        // this.createEnemy();
     },
-    createEnemy: function (enemyType) {
-        var ene = new EnemyPlane(enemyType);
-        ene.setPosition(cc.v2(300,800));
+    createEnemy: function () {
         var scene = cc.director.getScene();
-        scene.addChild(ene);
+        var plane_enemy
+        if(cc.enemyPool.size() > 0){
+            plane_enemy = cc.enemyPool.get();
+        }else{
+            var prefab_res = cc.loader.getRes('Prefab/enemy_1');
+            var plane_enemy = cc.instantiate(prefab_res);
+            plane_enemy.addComponent(cc.BoxCollider);
+            var frameSize2 = plane_enemy.getComponent(cc.Sprite).spriteFrame.getRect();
+            plane_enemy.getComponent(cc.BoxCollider).size = frameSize2;
+            plane_enemy.addComponent(EnemyPlane);
+        }
+        plane_enemy.getComponent(EnemyPlane).initPlane();
+        scene.addChild(plane_enemy);
+        var pos_x = Math.random()*640;
+        if(pos_x <20){
+            pos_x = 20;
+        }else if(pos_x > 620){
+            pos_x = 620;
+        }
+        plane_enemy.position = cc.v2(pos_x,1136);
+
     },
     onClickPause: function () {
         // // this.btn_pause.node.spriteFrame

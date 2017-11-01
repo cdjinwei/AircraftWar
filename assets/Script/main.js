@@ -19,7 +19,6 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        console.log("=============");
         cc.director.preloadScene('GameScene');
         cc.prefabRes = null;
         this.loadGameRes();
@@ -35,11 +34,9 @@ cc.Class({
         // });
         cc.loader.loadResDir('Prefab',function (err,asserts,urls) {
             if(err == null ) {
-                console.log('===========load res succ:'+urls.length);
                 cc.prefabRes = asserts;
                 for (var i=0;i<urls.length;i++){
                     var name = urls[i];
-                    console.log('=========name:'+name);
                 }
             }
         });

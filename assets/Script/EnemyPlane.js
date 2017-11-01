@@ -1,7 +1,7 @@
 var BasePlane = require('BasePlane');
 var config = require('config');
 cc.Class({
-    extends: BasePlane,
+    extends: cc.Component,
 
     properties: {
         // foo: {
@@ -14,12 +14,12 @@ cc.Class({
         //    readonly: false,    // optional, default is false
         // },
         // ...
-        nodeBody:{
-            default: null,
-            type: cc.Node,
+        blood:{
+            default: 2,
+            type: cc.Integer,
         },
         speed:{
-            default:300,
+            default:20,
             type: cc.Integer,
         },
         canMove: {
@@ -29,24 +29,44 @@ cc.Class({
     },
 
     // use this for initialization
-    ctor: function (enemyType) {
-        this.nodeBody = this.getCurrentNode();
-        this.speed = config.EnemyConfig[enemyType].speed;
+    // ctor: function (enemyType) {
+    //     this.nodeBody = this.getCurrentNode();
+    //     this.speed = config.EnemyConfig[enemyType].speed;
+    //     this.canMove = true;
+    // },
+    onLoad: function () {
+        // this.canMove = true;
+    },
+    initPlane: function () {
+        this.blood = 2;
         this.canMove = true;
     },
     onCollisionEnter: function (other,self) {
-        console.log('=======================get hit enemy');
+        this.getHit();
+    },
+    onCollisionStay: function (other,self) {
+        console.log('======================Enemy onCollisionStay');
+        this.getHit();
     },
     getHit: function () {
-        console.log('=======================get hit enemy');
+        this.blood -= 1;
+        if(this.blood <= 0){
+            if(cc.enemyPool){
+                cc.enemyPool.put(this.node);
+                console.log('===========enemy pool size:'+cc.enemyPool.size());
+            }else {
+                this.node.destroy();
+            }
+        }
     },
     setPosition: function (pos) {
-        this.nodeBody.position = pos;
+        this.node.position = pos;
     },
     // called every frame, uncomment this function to activate update callback
     update: function (dt) {
         if(this.canMove){
-            this.nodeBody.y -= this.speed*dt*5;
+            this.node.y -= this.speed*dt*3;
         }
+        console.log('========================================update:'+dt+',speed:'+this.speed);
     },
 });
