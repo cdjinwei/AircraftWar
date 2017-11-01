@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "ufo1",
+    "texture": "assets/resources/Texture/shoot.png",
+    "rect": [
+      560,
+      2,
+      58,
+      88
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      58,
+      88
+    ],
+    "rotated": 1
+  }
+}

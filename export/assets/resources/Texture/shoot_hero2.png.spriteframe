@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "hero2",
+    "texture": "assets/resources/Texture/shoot.png",
+    "rect": [
+      370,
+      55,
+      100,
+      122
+    ],
+    "offset": [
+      0,
+      1
+    ],
+    "originalSize": [
+      102,
+      126
+    ],
+    "rotated": 1
+  }
+}

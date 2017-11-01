@@ -1,0 +1,35 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "loading_anim",
+  "_objFlags": 0,
+  "_rawFiles": null,
+  "_duration": 1.0166666666666666,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": "assets/resources/Texture/shoot_background_game_loading1.png.spriteframe"
+          },
+          {
+            "frame": 0.3333333333333333,
+            "value": "assets/resources/Texture/shoot_background_game_loading2.png.spriteframe"
+          },
+          {
+            "frame": 0.6666666666666666,
+            "value": "assets/resources/Texture/shoot_background_game_loading3.png.spriteframe"
+          },
+          {
+            "frame": 1,
+            "value": "assets/resources/Texture/shoot_background_game_loading4.png.spriteframe"
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

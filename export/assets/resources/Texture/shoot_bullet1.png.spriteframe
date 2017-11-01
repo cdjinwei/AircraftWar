@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "bullet1",
+    "texture": "assets/resources/Texture/shoot.png",
+    "rect": [
+      25,
+      2,
+      9,
+      21
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      9,
+      21
+    ],
+    "rotated": 1
+  }
+}

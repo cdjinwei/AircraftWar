@@ -1,0 +1,21 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "shoot",
+    "texture": "assets/resources/Texture/shoot.png",
+    "rect": [
+      2,
+      2,
+      1017,
+      662
+    ],
+    "offset": [
+      -1.5,
+      179
+    ],
+    "originalSize": [
+      1024,
+      1024
+    ]
+  }
+}

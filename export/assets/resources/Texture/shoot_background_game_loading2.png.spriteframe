@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "game_loading2",
+    "texture": "assets/resources/Texture/shoot_background.png",
+    "rect": [
+      52,
+      1901,
+      108,
+      37
+    ],
+    "offset": [
+      -35,
+      0
+    ],
+    "originalSize": [
+      186,
+      37
+    ],
+    "rotated": 1
+  }
+}

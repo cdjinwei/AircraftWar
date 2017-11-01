@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "enemy3_down4",
+    "texture": "assets/resources/Texture/shoot.png",
+    "rect": [
+      207,
+      157,
+      165,
+      255
+    ],
+    "offset": [
+      0,
+      2
+    ],
+    "originalSize": [
+      165,
+      261
+    ],
+    "rotated": 1
+  }
+}

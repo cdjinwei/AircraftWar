@@ -1,0 +1,21 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "btnbg",
+    "texture": "assets/resources/Texture/btnbg.png",
+    "rect": [
+      1,
+      1,
+      98,
+      38
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      100,
+      40
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "hero_blowup_n1",
+    "texture": "assets/resources/Texture/shoot.png",
+    "rect": [
+      746,
+      73,
+      98,
+      124
+    ],
+    "offset": [
+      0,
+      -1
+    ],
+    "originalSize": [
+      102,
+      126
+    ],
+    "rotated": 1
+  }
+}

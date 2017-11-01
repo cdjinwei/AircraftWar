@@ -1,0 +1,21 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "bomb",
+    "texture": "assets/resources/Texture/shoot.png",
+    "rect": [
+      495,
+      2,
+      63,
+      53
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      63,
+      57
+    ]
+  }
+}

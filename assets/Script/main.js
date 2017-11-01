@@ -25,12 +25,22 @@ cc.Class({
         this.loadGameRes();
     },
     loadGameRes: function () {
-        cc.loader.loadRes('Prefab/hero',cc.Prefab,function (err,assert) {
-            if(err == null){
-                cc.prefabRes = assert;
-                console.log('==============load res succ');
-            }else{
-                console.log('==============load res error');
+        // cc.loader.loadRes('Prefab/hero',cc.Prefab,function (err,assert) {
+        //     if(err == null){
+        //         cc.prefabRes = assert;
+        //         console.log('==============load res succ');
+        //     }else{
+        //         console.log('==============load res error');
+        //     }
+        // });
+        cc.loader.loadResDir('Prefab',function (err,asserts,urls) {
+            if(err == null ) {
+                console.log('===========load res succ:'+urls.length);
+                cc.prefabRes = asserts;
+                for (var i=0;i<urls.length;i++){
+                    var name = urls[i];
+                    console.log('=========name:'+name);
+                }
             }
         });
     },

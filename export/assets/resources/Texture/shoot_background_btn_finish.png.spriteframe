@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "btn_finish",
+    "texture": "assets/resources/Texture/shoot_background.png",
+    "rect": [
+      2,
+      1901,
+      140,
+      48
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      150,
+      48
+    ],
+    "rotated": 1
+  }
+}

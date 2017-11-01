@@ -1,0 +1,21 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "shoot_copyright",
+    "texture": "assets/resources/Texture/shoot_background.png",
+    "rect": [
+      2,
+      1710,
+      429,
+      189
+    ],
+    "offset": [
+      -1,
+      -15
+    ],
+    "originalSize": [
+      441,
+      225
+    ]
+  }
+}
