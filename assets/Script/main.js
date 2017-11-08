@@ -19,19 +19,11 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        cc.director.preloadScene('GameScene');
         cc.prefabRes = null;
         this.loadGameRes();
     },
     loadGameRes: function () {
-        // cc.loader.loadRes('Prefab/hero',cc.Prefab,function (err,assert) {
-        //     if(err == null){
-        //         cc.prefabRes = assert;
-        //         console.log('==============load res succ');
-        //     }else{
-        //         console.log('==============load res error');
-        //     }
-        // });
+
         cc.loader.loadResDir('Prefab',function (err,asserts,urls) {
             if(err == null ) {
                 cc.prefabRes = asserts;

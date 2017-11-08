@@ -24,7 +24,7 @@ cc.Class({
         }
     },
     ctor: function (type) {
-        console.log('===============base ctor:'+type);
+
         var planeType = parseInt(type);
 
         var planeInfo = config.PlaneConfig[planeType];

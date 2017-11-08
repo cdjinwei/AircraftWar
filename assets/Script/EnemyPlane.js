@@ -45,7 +45,6 @@ cc.Class({
         this.getHit();
     },
     onCollisionStay: function (other,self) {
-        console.log('======================Enemy onCollisionStay');
         this.getHit();
     },
     getHit: function () {
@@ -53,7 +52,6 @@ cc.Class({
         if(this.blood <= 0){
             if(cc.enemyPool){
                 cc.enemyPool.put(this.node);
-                console.log('===========enemy pool size:'+cc.enemyPool.size());
             }else {
                 this.node.destroy();
             }
@@ -67,6 +65,12 @@ cc.Class({
         if(this.canMove){
             this.node.y -= this.speed*dt*3;
         }
-        console.log('========================================update:'+dt+',speed:'+this.speed);
+        if(this.node.y < 0){
+            if(cc.enemyPool){
+                cc.enemyPool.put(this.node);
+            }else{
+                this.node.destroy();
+            }
+        }
     },
 });

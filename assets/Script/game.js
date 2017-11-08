@@ -17,18 +17,15 @@ cc.Class({
         // btn_pause:{
         //
         // },
-        btn_pause: cc.Button,
-        btn_state: Boolean,
     },
 
     // use this for initialization
     onLoad: function () {
         var self = this;
         cc.director.getCollisionManager().enabled = true;
-        cc.director.getCollisionManager().enabledDebugDraw = true;
+        cc.director.getCollisionManager().enabledDebugDraw = false;
         cc.bulletPool = new cc.NodePool();
         cc.enemyPool = new cc.NodePool();
-        this.btn_state = true;
 
         var prefab_res = cc.loader.getRes('Prefab/hero');
         var plane_hero = cc.instantiate(prefab_res);
@@ -38,9 +35,9 @@ cc.Class({
         var scene = cc.director.getScene();
         scene.addChild(plane_hero);
         plane_hero.position = cc.v2(200,200);
-
+        //
         plane_hero.addComponent(HeroPlane);
-        cc.director.getScheduler().schedule(this.createEnemy, this, 10);
+        cc.director.getScheduler().schedule(this.createEnemy, this, 0.1);
         // this.createEnemy();
     },
     createEnemy: function () {

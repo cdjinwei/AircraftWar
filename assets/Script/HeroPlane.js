@@ -40,7 +40,7 @@ cc.Class({
 
     },
     onCollisionStay: function (other,self) {
-      console.log('====================Hero onCollisionStay');
+
     },
     registerControllEvent: function () {
         var self = this;
