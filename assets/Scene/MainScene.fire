@@ -729,7 +729,8 @@
     "node": {
       "__id__": 18
     },
-    "_enabled": true
+    "_enabled": true,
+    "testData": 111
   },
   {
     "__type__": "cc.Widget",

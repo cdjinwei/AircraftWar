@@ -15,12 +15,17 @@ cc.Class({
         //    readonly: false,    // optional, default is false
         // },
         // ...
+        testData: 111,
     },
 
     // use this for initialization
     onLoad: function () {
         cc.prefabRes = null;
         this.loadGameRes();
+        cc.EventHandler = require("EventHandler");
+    },
+    testFunc: function () {
+
     },
     loadGameRes: function () {
 
@@ -30,6 +35,11 @@ cc.Class({
                 for (var i=0;i<urls.length;i++){
                     var name = urls[i];
                 }
+            }
+        });
+        cc.loader.loadRes('Texture/shoot',cc.SpriteAtlas,function (err,asserts) {
+            if(err == null ) {
+                cc.textureRes = asserts;
             }
         });
     },

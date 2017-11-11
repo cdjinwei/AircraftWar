@@ -14,6 +14,7 @@ cc.Class({
         //    readonly: false,    // optional, default is false
         // },
         // ...
+        _score: 0,
         nodeBody: {
             default: null,
             type: cc.Node,
@@ -35,6 +36,11 @@ cc.Class({
     onLoad: function () {
         this.registerControllEvent();
         cc.director.getScheduler().schedule(this.shoot, this, 0.5);
+        cc.EventHandler.registerEvent('KILL_ENEMY',this.onKillEnemy,this);
+    },
+    onKillEnemy: function (score) {
+        this._score = this._score + score;
+        cc.EventHandler.sendEvent('UPDATE_SCORE',this._score);
     },
     onCollisionEnter: function (other,self) {
 

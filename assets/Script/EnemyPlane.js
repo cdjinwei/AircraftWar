@@ -36,6 +36,19 @@ cc.Class({
     // },
     onLoad: function () {
         // this.canMove = true;
+        this.anim = this.getComponent(cc.Animation);
+        this.anim.on('finished',this.onDestroyAnimStop,this);
+    },
+    onDestroyAnimStop: function () {
+        this.getComponent(cc.Sprite).spriteFrame = cc.textureRes.getSpriteFrame('enemy1');
+        if(cc.enemyPool){
+            cc.EventHandler.sendEvent('KILL_ENEMY',1);
+            cc.enemyPool.put(this.node);
+        }else {
+            cc.EventHandler.sendEvent('KILL_ENEMY',1);
+            this.node.destroy();
+        }
+
     },
     initPlane: function () {
         this.blood = 2;
@@ -50,12 +63,11 @@ cc.Class({
     getHit: function () {
         this.blood -= 1;
         if(this.blood <= 0){
-            if(cc.enemyPool){
-                cc.enemyPool.put(this.node);
-            }else {
-                this.node.destroy();
-            }
+            this.playDestroyAnim();
         }
+    },
+    playDestroyAnim: function () {
+        this.anim.play('enemy1_break');
     },
     setPosition: function (pos) {
         this.node.position = pos;
