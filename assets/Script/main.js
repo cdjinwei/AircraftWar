@@ -16,13 +16,22 @@ cc.Class({
         // },
         // ...
         testData: 111,
+        lab_highest_score:{
+            default: null,
+            type: cc.Label,
+        }
     },
 
     // use this for initialization
     onLoad: function () {
         cc.prefabRes = null;
         this.loadGameRes();
-        cc.EventHandler = require("EventHandler");
+        cc.EventHandler = cc.EventHandler || require("EventHandler");
+        this.setHighestScore();
+    },
+    setHighestScore: function () {
+        var s = cc.sys.localStorage.getItem("HIGHEST_SCORE") || 0;
+        this.lab_highest_score.string = '最高分：' + s;
     },
     testFunc: function () {
 
@@ -45,7 +54,7 @@ cc.Class({
     },
     onClickStart: function(){
         cc.director.loadScene('GameScene',function () {
-            console.log('load main scene success');
+            console.log('load game scene success');
         });
     },
 

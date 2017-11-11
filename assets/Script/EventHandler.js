@@ -30,5 +30,8 @@ var EeventHandler = {
     unRegisterEvent: function (event_name) {
         this._handlers[event_name] = null;
     },
+    unRegiserAllEvents: function () {
+        this._handlers = [];
+    }
 };
 module.exports = EeventHandler;

@@ -25,6 +25,10 @@ cc.Class({
         canMove: {
             default: false,
             type: cc.Boolean,
+        },
+        isAlive:{
+            default: true,
+            type: cc.Boolean,
         }
     },
 
@@ -40,7 +44,6 @@ cc.Class({
         this.anim.on('finished',this.onDestroyAnimStop,this);
     },
     onDestroyAnimStop: function () {
-        this.getComponent(cc.Sprite).spriteFrame = cc.textureRes.getSpriteFrame('enemy1');
         if(cc.enemyPool){
             cc.EventHandler.sendEvent('KILL_ENEMY',1);
             cc.enemyPool.put(this.node);
@@ -48,21 +51,27 @@ cc.Class({
             cc.EventHandler.sendEvent('KILL_ENEMY',1);
             this.node.destroy();
         }
-
     },
     initPlane: function () {
+        this.getComponent(cc.Sprite).spriteFrame = cc.textureRes.getSpriteFrame('enemy1');
         this.blood = 2;
         this.canMove = true;
+        this.isAlive = true;
     },
     onCollisionEnter: function (other,self) {
-        this.getHit();
+        if(this.isAlive){
+            this.getHit();
+        }
     },
     onCollisionStay: function (other,self) {
-        this.getHit();
+        if(this.isAlive){
+            this.getHit();
+        }
     },
     getHit: function () {
         this.blood -= 1;
         if(this.blood <= 0){
+            this.isAlive = false;
             this.playDestroyAnim();
         }
     },

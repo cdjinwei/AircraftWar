@@ -21,10 +21,8 @@ var Bullet = cc.Class({
 
     },
     onCollisionEnter:function (other,self) {
-        // this.node.destroy();
         if(cc.bulletPool){
             cc.bulletPool.put(this.node);
-            // console.log('===============bullet pool put:'+cc.bulletPool.size());
         }else{
             this.node.destroy();
         }
@@ -32,8 +30,6 @@ var Bullet = cc.Class({
     // called every frame, uncomment this function to activate update callback
     update: function (dt) {
         this.node.y += this.speed*dt*5;
-        // console.log('========================dt:'+dt);
-        // this.node.y += this.speed;
         if(this.node.y > 1130){
             if(cc.bulletPool){
                 cc.bulletPool.put(this.node);

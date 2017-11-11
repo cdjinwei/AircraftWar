@@ -23,6 +23,14 @@ cc.Class({
             default: false,
             type: cc.Boolean,
         },
+        isAlive: {
+            default: true,
+            type: cc.Boolean,
+        },
+        blood: {
+            default: 10,
+            type: cc.Integer
+        }
     },
 
     // ctor: function () {
@@ -39,14 +47,30 @@ cc.Class({
         cc.EventHandler.registerEvent('KILL_ENEMY',this.onKillEnemy,this);
     },
     onKillEnemy: function (score) {
-        this._score = this._score + score;
-        cc.EventHandler.sendEvent('UPDATE_SCORE',this._score);
+        cc.EventHandler.sendEvent('UPDATE_SCORE',score);
     },
     onCollisionEnter: function (other,self) {
-
+        var enemy_blood = other.getComponent('EnemyPlane').blood;
+        if(enemy_blood && enemy_blood >0 && this.isAlive){
+            this.getHit();
+        }
     },
     onCollisionStay: function (other,self) {
+        var enemy_blood = other.getComponent('EnemyPlane').blood;
+        if(enemy_blood && enemy_blood >0 && this.isAlive){
+            this.getHit();
+        }
+    },
+    getHit: function () {
+        this.blood -= 1;
+        if(this.blood <= 0){
+            this.isAlive = false;
+            //game over
 
+            cc.EventHandler.sendEvent('GAME_OVER');
+            // cc.director.pause();
+        }
+        console.log('==================getHit hero:'+this.blood);
     },
     registerControllEvent: function () {
         var self = this;
@@ -81,9 +105,6 @@ cc.Class({
     },
     setPosition: function (pos) {
         this.node.position = pos;
-    },
-    getHit: function () {
-        // console.log('==================getHit hero');
     },
     adjustPlanePosition: function (deltaPos) {
         var self = this;

@@ -14,6 +14,7 @@ cc.Class({
         //    readonly: false,    // optional, default is false
         // },
         // ...
+        _score: 0,
         btn_pause:{
             default: null,
             type: cc.Button,
@@ -21,16 +22,23 @@ cc.Class({
         score_label:{
             default: null,
             type: cc.Label,
-        }
+        },
+        node_over_panel:{
+            default: null,
+            type: cc.Node,
+        },
+        game_layer:{
+            default: null,
+            type: cc.Node,
+        },
     },
 
     // use this for initialization
     onLoad: function () {
-        var self = this;
         cc.director.getCollisionManager().enabled = true;
         cc.director.getCollisionManager().enabledDebugDraw = false;
-        cc.bulletPool = new cc.NodePool();
-        cc.enemyPool = new cc.NodePool();
+        cc.bulletPool = cc.bulletPool || new cc.NodePool();
+        cc.enemyPool = cc.enemyPool || new cc.NodePool();
 
         var prefab_res = cc.loader.getRes('Prefab/hero');
         var plane_hero = cc.instantiate(prefab_res);
@@ -38,13 +46,26 @@ cc.Class({
         var frameSize = plane_hero.getComponent(cc.Sprite).spriteFrame.getRect();
         plane_hero.getComponent(cc.BoxCollider).size = frameSize;
         var scene = cc.director.getScene();
-        scene.addChild(plane_hero);
+        // scene.addChild(plane_hero);
+        this.game_layer.addChild(plane_hero);
         plane_hero.position = cc.v2(200,200);
         //
         plane_hero.addComponent(HeroPlane);
-        cc.director.getScheduler().schedule(this.createEnemy, this, 0.3);
-        // this.createEnemy();
+        this.enemy_scheduler = cc.director.getScheduler().schedule(this.createEnemy, this, 0.3);
+
         cc.EventHandler.registerEvent('UPDATE_SCORE',this.updateScore,this);
+        cc.EventHandler.registerEvent('GAME_OVER',this.gameOver,this);
+    },
+    onClickOverBtn: function () {
+        cc.EventHandler.unRegiserAllEvents();
+        cc.director.loadScene('MainScene',function () {
+        });
+    },
+    gameOver: function () {
+        cc.director.getScheduler().unscheduleUpdate(this.enemy_scheduler);
+        cc.sys.localStorage.setItem('HIGHEST_SCORE',this._score);
+        this.node_over_panel.getChildByName('lab_score').getComponent(cc.Label).string = '你的得分是：'+this._score;
+        this.node_over_panel.active = true;
     },
     createEnemy: function () {
         var scene = cc.director.getScene();
@@ -60,7 +81,8 @@ cc.Class({
             plane_enemy.addComponent(EnemyPlane);
         }
         plane_enemy.getComponent(EnemyPlane).initPlane();
-        scene.addChild(plane_enemy);
+        // scene.addChild(plane_enemy);
+        this.game_layer.addChild(plane_enemy);
         var pos_x = Math.random()*640;
         if(pos_x <20){
             pos_x = 20;
@@ -71,7 +93,8 @@ cc.Class({
 
     },
     updateScore: function (score) {
-        this.score_label.string = 'Score:'+score;
+        this._score += score;
+        this.score_label.string = 'Score:'+this._score;
     },
     onClickPause: function () {
 
