@@ -45,6 +45,7 @@ cc.Class({
         this.registerControllEvent();
         cc.director.getScheduler().schedule(this.shoot, this, 0.5);
         cc.EventHandler.registerEvent('KILL_ENEMY',this.onKillEnemy,this);
+        cc.EventHandler.sendEvent('UPDATE_PLAYER_HP',this.blood);
     },
     onKillEnemy: function (score) {
         cc.EventHandler.sendEvent('UPDATE_SCORE',score);
@@ -63,6 +64,7 @@ cc.Class({
     },
     getHit: function () {
         this.blood -= 1;
+        cc.EventHandler.sendEvent('UPDATE_PLAYER_HP',this.blood);
         if(this.blood <= 0){
             this.isAlive = false;
             //game over

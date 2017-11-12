@@ -23,6 +23,10 @@ cc.Class({
             default: null,
             type: cc.Label,
         },
+        hp_label: {
+            default: null,
+            type: cc.Label,
+        },
         node_over_panel:{
             default: null,
             type: cc.Node,
@@ -40,6 +44,9 @@ cc.Class({
         cc.bulletPool = cc.bulletPool || new cc.NodePool();
         cc.enemyPool = cc.enemyPool || new cc.NodePool();
 
+        cc.EventHandler.registerEvent('UPDATE_SCORE',this.updateScore,this);
+        cc.EventHandler.registerEvent('UPDATE_PLAYER_HP',this.updatePlayerHp,this);
+        cc.EventHandler.registerEvent('GAME_OVER',this.gameOver,this);
         var prefab_res = cc.loader.getRes('Prefab/hero');
         var plane_hero = cc.instantiate(prefab_res);
         plane_hero.addComponent(cc.BoxCollider);
@@ -53,8 +60,10 @@ cc.Class({
         plane_hero.addComponent(HeroPlane);
         this.enemy_scheduler = cc.director.getScheduler().schedule(this.createEnemy, this, 0.3);
 
-        cc.EventHandler.registerEvent('UPDATE_SCORE',this.updateScore,this);
-        cc.EventHandler.registerEvent('GAME_OVER',this.gameOver,this);
+
+    },
+    updatePlayerHp: function (hp) {
+        this.hp_label.getComponent(cc.Label).string = 'HP:'+hp;
     },
     onClickOverBtn: function () {
         cc.EventHandler.unRegiserAllEvents();
